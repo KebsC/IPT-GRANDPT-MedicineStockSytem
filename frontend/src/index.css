@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero {
+  height: 24rem; /* same as h-96 in Tailwind */
+  background-image: url("./lib/images/hero-bg.png"); /* path to your image */
+  background-size: cover; /* same as bg-cover */
+  background-position: center; /* same as bg-center */
+  position: relative; /* so you can overlay content */
+}
