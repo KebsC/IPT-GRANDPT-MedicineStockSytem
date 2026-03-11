@@ -3,8 +3,20 @@ import { useState } from "react";
 const BuyModal = ({ medicine, onClose, onConfirm }) => {
   const [quantity, setQuantity] = useState(1);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (quantity < 1 || quantity > medicine.stock) return;
+
+    await fetch("http://localhost:5001/purchases", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: medicine.name,
+        pharmacy: medicine.pharmacy,
+        quantity,
+        price: medicine.price,
+      }),
+    });
+
     onConfirm(medicine._id, quantity);
   };
 

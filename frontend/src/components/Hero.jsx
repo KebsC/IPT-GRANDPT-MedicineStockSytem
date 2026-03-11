@@ -4,27 +4,27 @@ import { useState } from "react";
 const Hero = ({ onSearchResults }) => {
   const [search, setSearch] = useState("");
 
-  const handleSearch = async () => {
-  if (!search.trim()) {
-    onSearchResults(null);
-    return;
-  }
+  const handleSearch = async (value = search) => {
+    if (!value.trim()) {
+      onSearchResults(null);
+      return;
+    }
 
-  const res = await fetch(`http://localhost:5001/medicines/${search}`);
+    const res = await fetch(`http://localhost:5001/medicines/${value}`);
 
-  if (!res.ok) {
-    onSearchResults([]);
-    return;
-  }
+    if (!res.ok) {
+      onSearchResults([]);
+      return;
+    }
 
-  const data = await res.json();
-  onSearchResults(Array.isArray(data) ? data : [data]);
-};
+    const data = await res.json();
+    onSearchResults(Array.isArray(data) ? data : [data]);
+  };
 
   return (
     <section className="hero">
       <div className="absolute inset-0 flex flex-col items-start px-24 justify-center text-white">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Bangag Botika</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to MahinayDB</h1>
         <p className="text-lg mb-6">
           Search for medicines across multiple pharmacies
         </p>
@@ -34,7 +34,10 @@ const Hero = ({ onSearchResults }) => {
             type="text"
             placeholder="Search for medicines..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              handleSearch(e.target.value);
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSearch();
             }}

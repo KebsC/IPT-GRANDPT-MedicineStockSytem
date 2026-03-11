@@ -29,16 +29,17 @@ const MainContent = ({ searchResults }) => {
 
   const handleConfirmPurchase = async (id, quantity) => {
     try {
-      await fetch(`http://localhost:5001/medicines/${id}/buy`, {
-        method: "PATCH",
+      const medicine = medicines.find((m) => m._id === id);
+      await fetch(`http://localhost:5001/medicines/${id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ quantity }),
+        body: JSON.stringify({ stock: medicine.stock - quantity }),
       });
       await fetchMedicines();
       setSelectedMedicine(null);
       setQuantity(1);
     } catch (error) {
-      console.error("Error buying medicine :", error);
+      console.error("Error buying medicine:", error);
     }
   };
 
@@ -46,7 +47,11 @@ const MainContent = ({ searchResults }) => {
   if (isLoading) return <p>Loading Medicines...</p>;
 
   if (displayMedicines.filter((m) => m.stock > 0).length === 0) {
-    return <p className="text-center p-12 text-2xl">No medicines in stock with that name.</p>;
+    return (
+      <p className="text-center p-12 text-2xl">
+        No medicines in stock with that name.
+      </p>
+    );
   }
 
   return (

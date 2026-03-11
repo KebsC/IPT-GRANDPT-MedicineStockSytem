@@ -2,6 +2,7 @@ import express, { json } from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import medicineRoutes from "../routes/medicineRoutes.js";
+import purchaseRoutes from "../routes/purchaseRoutes.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 connectDB();
 
+app.use("/purchases", purchaseRoutes);
 app.use("/medicines", medicineRoutes);
 
 app.get("/", (req, res) => res.send("Hello, World!"));
