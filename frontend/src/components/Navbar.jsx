@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             <Link to="/">
               <h1 className="text-4xl font-bold text-primary font-mono tracking-tight ml-12">
-                MahinayDB
+                NeaRX
               </h1>
             </Link>
             <div className="flex items-center gap-4">
