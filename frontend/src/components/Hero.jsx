@@ -24,7 +24,7 @@ const Hero = ({ onSearchResults }) => {
   return (
     <section className="hero">
       <div className="absolute inset-0 flex flex-col items-start px-24 justify-center text-white">
-        <h1 className="text-4xl font-bold mb-4">Welcome to NeaRX</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to MediFind</h1>
         <p className="text-lg mb-6">
           Search for medicines across multiple pharmacies
         </p>
